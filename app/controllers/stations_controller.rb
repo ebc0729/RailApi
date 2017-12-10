@@ -10,12 +10,19 @@ class StationsController < ApplicationController
   end
 
   def lines
-    name = Station.find(params[:id]).name
-    lines = Station.where(name: name).select('line_id')
+    # params[:id]から駅名、エリアIDを取得
+    selected = Station.joins("LEFT OUTER JOIN lines ON stations.line_id = lines.id")
+              .joins("LEFT OUTER JOIN companies ON lines.company_id = companies.id")
+              .where("stations.id = ?", params[:id])
+              .select("companies.area_id AS AreaID", "stations.name AS StationName")
+              .first
 
-    @lines = lines.map{|line|
-      Line.find(line.line_id)
-    }
-    render json: @lines
+    # 駅名、エリアIDから路線名、会社名取得
+    lines = Station.joins("LEFT OUTER JOIN lines ON stations.line_id = lines.id")
+              .joins("LEFT OUTER JOIN companies ON lines.company_id = companies.id")
+              .where("stations.name = ? AND companies.area_id = ?", selected.StationName, selected.AreaID)
+              .select("lines.name AS LineName, companies.name AS CompanyName")
+
+    render json: lines
   end
 end
