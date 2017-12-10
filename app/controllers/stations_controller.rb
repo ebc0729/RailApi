@@ -17,6 +17,10 @@ class StationsController < ApplicationController
               .select("companies.area_id AS AreaID", "stations.name AS StationName")
               .first
 
+    if (selected == nil) then
+      return head(:bad_request)
+    end
+
     # 駅名、エリアIDから路線名、会社名取得
     lines = Station.joins("LEFT OUTER JOIN lines ON stations.line_id = lines.id")
               .joins("LEFT OUTER JOIN companies ON lines.company_id = companies.id")
