@@ -1,9 +1,12 @@
+require 'JSON'
 class RailsController < ApplicationController
     def index
-        start_station = Station.find_by_id(params[:start].to_i)
-        end_station = Station.find_by_id(params[:end].to_i)
+        json_params = JSON.parse(request.body.read)
+        # line_id = json_params['line_id'].to_i
+        start_station = Station.find_by(id: json_params['start'].to_i)
+        end_station = Station.find_by_id(json_params['end'].to_i)
         if start_station.nil? || end_station.nil? then
-            render json: {'message': 'ERROR'}, status: 400
+            render json: {'message': 'No stations'}, status: 400
             return
         end
         start_order = start_station['rail_order']
@@ -13,7 +16,7 @@ class RailsController < ApplicationController
         end
         order = Rail.arel_table[:order]
         unless order then
-            render json: {'message': 'ERROR'}, status: 400
+            render json: {'message': 'No rails'}, status: 400
             return
         end
         @rails = Rail.where(order.gteq(start_order).and(order.lteq(end_order)))
