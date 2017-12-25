@@ -3,6 +3,7 @@ class CreateStations < ActiveRecord::Migration[5.1]
     create_table :stations do |t|
       t.integer :line_id
       t.string :name
+      t.integer :rail_order
 
       t.timestamps
     end

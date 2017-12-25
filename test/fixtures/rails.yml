@@ -2,10 +2,12 @@
 
 one:
   line_id: 1
-  name: MyString
-  rail_order: 1
+  data: MyString
+  order: 1
+  is_station: false
 
 two:
   line_id: 1
-  name: MyString
-  rail_order: 1
+  data: MyString
+  order: 1
+  is_station: false

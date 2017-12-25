@@ -41,11 +41,21 @@ end
 puts "Finish Line"
 
 puts "Insert Station"
-CSV.foreach('db/station.csv') do |row|
+CSV.foreach('db/test_station.csv') do |row|
 	areaId = row[0].to_i
+	order = row[4].to_i
 	companyId = Company.find_by({area_id: areaId, name: row[1]}).id
 	lineId = Line.find_by({company_id: companyId, name: row[2]}).id
-	Station.create({line_id: lineId, name: row[3]})
+	Station.create({line_id: lineId, name: row[3], rail_order: order})
 end
 puts "Finish Station"
 
+puts "Insert Rail"
+json = ActiveSupport::JSON.decode(File.read('db/test_rail_result.json'))
+
+# 変数jsonに入った配列状態のjsonデータを一つ一つ取り出して、モデル.createを使ってdbに投入
+json['features'].each do |data|
+	lineId = Line.find_by({name: data['properties']['路線名']}).id	
+	Rail.create({line_id:lineId, data:data['geometry']['coordinates'].to_s,order:data['properties']['order'],is_station:data['properties']['is_station']})
+end
+puts "Finish Rail"
