@@ -1,6 +1,6 @@
-class CreateLines < ActiveRecord::Migration[5.1]
+class CreateRoutes < ActiveRecord::Migration[5.1]
   def change
-    create_table :lines do |t|
+    create_table :routes do |t|
       t.integer :company_id
       t.string :name
 
