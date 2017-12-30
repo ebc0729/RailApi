@@ -10,7 +10,7 @@ require "csv"
 puts "Delete data"
 Area.delete_all
 Company.delete_all
-Line.delete_all
+Route.delete_all
 Station.delete_all
 puts "Finish Deleting"
 
@@ -32,20 +32,20 @@ CSV.foreach('db/company.csv') do |row|
 end
 puts "Finish Company"
 
-puts "Insert Line"
-CSV.foreach('db/line.csv') do |row|
+puts "Insert Route"
+CSV.foreach('db/route.csv') do |row|
 	areaId = row[0].to_i
 	companyId = Company.find_by({area_id: areaId, name: row[1]}).id
-	Line.create({company_id: companyId, name: row[2]})
+	Route.create({company_id: companyId, name: row[2]})
 end
-puts "Finish Line"
+puts "Finish Route"
 
 puts "Insert Station"
 CSV.foreach('db/station.csv') do |row|
 	areaId = row[0].to_i
 	companyId = Company.find_by({area_id: areaId, name: row[1]}).id
-	lineId = Line.find_by({company_id: companyId, name: row[2]}).id
-	Station.create({line_id: lineId, name: row[3]})
+	routeId = Route.find_by({company_id: companyId, name: row[2]}).id
+	Station.create({route_id: routeId, name: row[3]})
 end
 puts "Finish Station"
 
