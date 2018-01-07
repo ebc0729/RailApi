@@ -8,4 +8,10 @@ class AreasController < ApplicationController
         @area = Area.find(params[:id])
         render json: @area
     end
+
+    def companies
+        @companies = Company.where(area_id: params[:id])
+        print @companies
+        render json: @companies
+    end
 end
