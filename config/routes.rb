@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'areas/:id/companies', to: 'areas#companies'
   resources :areas
   resources :stations
   resources :companies
