@@ -11,7 +11,6 @@ class AreasController < ApplicationController
 
     def companies
         @companies = Company.where(area_id: params[:id])
-        print @companies
         render json: @companies
     end
 end
