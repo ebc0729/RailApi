@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171230092207) do
+ActiveRecord::Schema.define(version: 20180114072108) do
 
   create_table "areas", force: :cascade do |t|
     t.string "name"
@@ -21,6 +21,15 @@ ActiveRecord::Schema.define(version: 20171230092207) do
   create_table "companies", force: :cascade do |t|
     t.integer "area_id"
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "rails", force: :cascade do |t|
+    t.integer "route_id"
+    t.string "data"
+    t.integer "order"
+    t.boolean "is_station"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
