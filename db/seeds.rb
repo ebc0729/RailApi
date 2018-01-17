@@ -45,7 +45,13 @@ CSV.foreach('db/station.csv') do |row|
 	areaId = row[0].to_i
 	order = row[4].to_i
 	company = Company.find_by({area_id: areaId, name: row[1]})
+	if company.nil? then
+		p '会社:' + row[1]
+	end
 	route = Route.find_by({company_id: company.id, name: row[2]})
+	if route.nil? then
+		p '路線:' + row[2]
+	end
 	Station.create({route_id: route.id, name: row[3], 'rail_order': order})
 end
 puts "Finish Station"
