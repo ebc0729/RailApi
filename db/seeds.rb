@@ -43,9 +43,28 @@ puts "Finish Route"
 puts "Insert Station"
 CSV.foreach('db/station.csv') do |row|
 	areaId = row[0].to_i
-	companyId = Company.find_by({area_id: areaId, name: row[1]}).id
-	routeId = Route.find_by({company_id: companyId, name: row[2]}).id
-	Station.create({route_id: routeId, name: row[3]})
+	order = row[4].to_i
+	company = Company.find_by({area_id: areaId, name: row[1]})
+	if company.nil? then
+		p '会社:' + row[1]
+	end
+	route = Route.find_by({company_id: company.id, name: row[2]})
+	if route.nil? then
+		p '路線:' + row[2]
+	end
+	Station.create({route_id: route.id, name: row[3], 'rail_order': order})
 end
 puts "Finish Station"
 
+puts "Insert Rail"
+json = ActiveSupport::JSON.decode(File.read('db/rail.json'))
+
+# 変数jsonに入った配列状態のjsonデータを一つ一つ取り出して、モデル.createを使ってdbに投入
+json['features'].each do |data|
+	route = Route.find_by({name: data['properties']['路線名']})
+	if route.nil? then
+		p data['properties']['路線名']
+	end
+	Rail.create({route_id:route.id, data:data['geometry']['coordinates'].to_s,order:data['properties']['order'],is_station:data['properties']['is_station']})
+end
+puts "Finish Rail"
