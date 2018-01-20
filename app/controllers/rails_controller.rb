@@ -8,9 +8,10 @@ class RailsController < ApplicationController
         if start_order > end_order then
             start_order, end_order = end_order, start_order
         end
-        order = Rail.arel_table[:order]
+        order = Rail.arel_table['rail_order']
         @rails = Rail.where({'route_id': route_id})
             .where(order.gteq(start_order).and(order.lteq(end_order)))
+            .order('rail_order')
         unless @rails then
             render json: {'message': 'No rails'}, status: 400
             return
