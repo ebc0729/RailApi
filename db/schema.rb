@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180120071611) do
+ActiveRecord::Schema.define(version: 20180120092037) do
 
   create_table "areas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20180120071611) do
 
   create_table "rails", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "route_id"
-    t.string "data"
+    t.text "data"
     t.integer "rail_order"
     t.boolean "is_station"
     t.datetime "created_at", null: false
