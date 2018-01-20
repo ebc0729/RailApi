@@ -65,6 +65,6 @@ json['features'].each do |data|
 	if route.nil? then
 		p data['properties']['路線名']
 	end
-	Rail.create({route_id:route.id, data:data['geometry']['coordinates'].to_s,order:data['properties']['order'],is_station:data['properties']['is_station']})
+	Rail.create({route_id:route.id, data:data['geometry']['coordinates'].to_s, rail_order:data['properties']['order'],is_station:data['properties']['is_station']})
 end
 puts "Finish Rail"
