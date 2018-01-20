@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get 'areas/:id/companies', to: 'areas#companies'
+  get 'companies/:id/routes', to: 'companies#routes'
   resources :areas
   resources :routes
   resources :stations

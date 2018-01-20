@@ -8,4 +8,10 @@ class CompaniesController < ApplicationController
         @company = Company.find(params[:id])
         render json: @company
     end
+
+    def routes
+        @routes = Route.where(company_id: params[:id])
+        render json: @routes
+    end
+
 end
