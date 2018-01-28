@@ -15,15 +15,42 @@ Station.delete_all
 puts "Finish Deleting"
 
 puts "Insert Area"
-Area.create({name: '北海道'})
-Area.create({name: '東北'})
-Area.create({name: '関東'})
-Area.create({name: '甲信越'})
-Area.create({name: '東海・北陸'})
-Area.create({name: '近畿'})
-Area.create({name: '中国'})
-Area.create({name: '四国'})
-Area.create({name: '九州'})
+Area.create do |a|
+	a.id = 1
+	a.name = '北海道'
+end
+Area.create do |a|
+	a.id = 2
+	a.name = '東北'
+end
+Area.create do |a|
+	a.id = 3
+	a.name = '関東'
+end
+Area.create do |a|
+	a.id = 4
+	a.name = '甲信越'
+end
+Area.create do |a|
+	a.id = 5
+	a.name = '東海・北陸'
+end
+Area.create do |a|
+	a.id = 6
+	a.name = '近畿'
+end
+Area.create do |a|
+	a.id = 7
+	a.name = '中国'
+end
+Area.create do |a|
+	a.id = 8
+	a.name = '四国'
+end
+Area.create do |a|
+	a.id = 9
+	a.name = '九州'
+end
 puts "Finish Area"
 
 puts "Insert Company"
