@@ -1,17 +1,16 @@
 class CompaniesController < ApplicationController
     def index
-        @companies = Company.all
+        if params[:area_id].present?
+            @companies = Company.where(area_id: params[:area_id])
+        else
+            @companies = Company.all
+        end
+
         render json: @companies
     end
-    
+
     def show
         @company = Company.find(params[:id])
         render json: @company
     end
-
-    def routes
-        @routes = Route.where(company_id: params[:id])
-        render json: @routes
-    end
-
 end
