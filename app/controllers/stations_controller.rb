@@ -1,6 +1,13 @@
 class StationsController < ApplicationController
   def index
-    @stations = Station.all
+    if params[:route_id].present?
+        @stations = Station
+                    .where(route_id: params[:route_id])
+                    .order('rail_order')
+    else
+        @stations = Station.all
+    end
+
     render json: @stations
   end
 
