@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   get 'areas/:id/companies', to: 'areas#companies'
   get 'companies/:id/routes', to: 'companies#routes'
   get 'routes/:id/stations', to: 'routes#stations'
