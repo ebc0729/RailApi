@@ -5,7 +5,18 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-
+# 修正依頼がありましたので、追加しました。お手数おかけしました。
+gem 'omniauth'
+ 
+# トークンベースの認証を行うためのgem
+gem 'devise'
+gem 'devise_token_auth'
+ 
+# jsonを扱うためのgem
+gem 'jbuilder'
+ 
+# クロスドメイン対策のgem
+gem 'rack-cors'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.3'
 # Use sqlite3 as the database for Active Record
@@ -28,7 +39,7 @@ gem 'puma', '~> 3.7'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'byebug', platforms: [:mri]
 end
 
 group :development do
