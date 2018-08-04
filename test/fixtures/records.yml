@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  route: one
+  start_order: 1
+  end_order: 1
+
+two:
+  user: two
+  route: two
+  start_order: 1
+  end_order: 1
