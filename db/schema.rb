@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180813012950) do
+ActiveRecord::Schema.define(version: 20180813020339) do
 
   create_table "areas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -39,11 +39,13 @@ ActiveRecord::Schema.define(version: 20180813012950) do
   create_table "records", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "user_id"
     t.bigint "route_id"
-    t.integer "start_station_id"
-    t.integer "end_station_id"
+    t.bigint "start_station_id"
+    t.bigint "end_station_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["end_station_id"], name: "index_records_on_end_station_id"
     t.index ["route_id"], name: "index_records_on_route_id"
+    t.index ["start_station_id"], name: "index_records_on_start_station_id"
     t.index ["user_id"], name: "index_records_on_user_id"
   end
 
@@ -93,5 +95,7 @@ ActiveRecord::Schema.define(version: 20180813012950) do
   end
 
   add_foreign_key "records", "routes"
+  add_foreign_key "records", "stations", column: "end_station_id"
+  add_foreign_key "records", "stations", column: "start_station_id"
   add_foreign_key "records", "users"
 end
