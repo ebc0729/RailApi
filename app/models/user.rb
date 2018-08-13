@@ -7,4 +7,5 @@ class User < ApplicationRecord
          # :confirmable, :omniauthable
   include DeviseTokenAuth::Concerns::User
 
+
 end
