@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :companies
   resources :users
 	post '/rails/generates', to: 'rails#generates'
+  post '/records', to: 'records#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   namespace :api do
